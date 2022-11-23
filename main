@@ -12,20 +12,27 @@ namespace App
             int ileRazy = 0;
             do
             { guess = int.Parse(Console.ReadLine());
-                if (guess > roll)
+                if (guess <= 0 || guess > 100)
                 {
-                    ileRazy++;
-                    Console.WriteLine("Za duzo");
-                }
-                else if (guess < roll)
-                {
-                    ileRazy++;
-                    Console.WriteLine("Za malo");
+                    Console.WriteLine("Liczba spoza zakresu!");
                 }
                 else
                 {
-                    ileRazy++;
-                    Console.WriteLine("Gratuluje! Liczba wylosowana przez komputer to " + roll + ".\nZa {0} razem.", ileRazy);
+                    if (guess > roll)
+                    {
+                        ileRazy++;
+                        Console.WriteLine("Za duzo");
+                    }
+                    else if (guess < roll)
+                    {
+                        ileRazy++;
+                        Console.WriteLine("Za malo");
+                    }
+                    else
+                    {
+                        ileRazy++;
+                        Console.WriteLine("Gratuluje! Liczba wylosowana przez komputer to " + roll + ".\nZa {0} razem.", ileRazy);
+                    }
                 }
             }while(guess != roll); // Pętla sie wykonuje dopóki warunek nie zostaine spełniony, w tym wypadku dopóki próba zgadnięcia będzie różna od wylosowanej liczb
         }                          //Gdy próba zgadnięcia będzie taka sama jak wylosowana liczba, pętla nie wykona się następnyt raz

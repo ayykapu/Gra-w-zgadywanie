@@ -1,40 +1,49 @@
 using System;
-namespace App
+namespace Zgadywanie
 {
     class Cl1
     {
         static void Main(string[] args)
         {
+        start:
             Random randomNumber = new Random();
             int roll = randomNumber.Next(1, 101);
-            Console.WriteLine("Zgadnij jaką liczbe wylosowal komputer z przedzialu od 1 do 100: ");
-            int guess;
-            int ileRazy = 0;
+            Console.Clear();
+            Console.WriteLine("Komputer wylosowal liczbe od 1 do 100. Zgadnij jaka to liczba:");
+            int inputNumber;
+            int attempt = 1;
             do
-            { guess = int.Parse(Console.ReadLine());
-                if (guess <= 0 || guess > 100)
+            {
+                inputNumber = int.Parse(Console.ReadLine());
+                if (inputNumber > 100 || inputNumber < 1)
                 {
-                    Console.WriteLine("Liczba spoza zakresu!");
+                    Console.WriteLine("Liczba spoza zakresu");
+                }
+                else if (inputNumber > roll)
+                {
+                    Console.WriteLine("Za duzo!");
+                    attempt++;
+                }
+                else if (inputNumber < roll)
+                {
+                    Console.WriteLine("Za malo!");
+                    attempt++;
                 }
                 else
                 {
-                    if (guess > roll)
-                    {
-                        ileRazy++;
-                        Console.WriteLine("Za duzo");
-                    }
-                    else if (guess < roll)
-                    {
-                        ileRazy++;
-                        Console.WriteLine("Za malo");
-                    }
-                    else
-                    {
-                        ileRazy++;
-                        Console.WriteLine("Gratuluje! Liczba wylosowana przez komputer to " + roll + ".\nZa {0} razem.", ileRazy);
-                    }
+                    Console.Clear();
+                    Console.WriteLine("Gratulacje! Odgadles numer wylosowany przez komputer za {0} razem!", attempt);
                 }
-            }while(guess != roll); // Pętla sie wykonuje dopóki warunek nie zostaine spełniony, w tym wypadku dopóki próba zgadnięcia będzie różna od wylosowanej liczb
-        }                          //Gdy próba zgadnięcia będzie taka sama jak wylosowana liczba, pętla nie wykona się następnyt raz
-    } 
+            } while (inputNumber != roll);
+            Console.WriteLine("Czy chcesz zagrać ponownie? (1 - tak, 2 - nie)");
+            byte instruction;
+                do
+            {
+                instruction = byte.Parse(Console.ReadLine());
+                if (instruction == 1) { goto start; }
+                else if (instruction == 2) { Console.WriteLine("Do zobaczenia"); }
+                else { Console.WriteLine("Instrukacja nieczytelna, sprobuj ponownie"); }
+            }  while (instruction != 2);
+        }
+    }
 }
